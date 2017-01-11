@@ -4,8 +4,15 @@
 	<select id="getMember3" parameterType="map" resultType="Member3">
 		select * from member3
 		<where>
-			<if test="userid != null">login_userid=#{login_userid}</if>
-			<if test="password != null">and login_password=#{login_password}</if>
+			<if test="login_userid != null">userid=#{login_userid}</if>
+			<if test="login_password != null">and password=#{login_password}</if>
+		</where>
+		<where>
+			<if test="find_birth != null">birth=#{find_birth}</if>
+			<if test="find_email != null">email=#{find_email}</if>
+			<if test="find_p_1 != null">p_1=#{find_p_1}</if>
+			<if test="find_p_2 != null">p_2=#{find_p_2}</if>
+			<if test="find_email_confirm != null"></if>
 		</where>
 	</select>
 </mapper>

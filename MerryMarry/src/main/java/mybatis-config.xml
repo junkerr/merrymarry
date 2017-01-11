@@ -9,5 +9,6 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="dao/mapper/MatchingMapper.xml"/>
+		<mapper resource="dao/mapper/MemberMapper.xml"/>
 	</mappers>
 </configuration>

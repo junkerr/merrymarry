@@ -18,7 +18,7 @@
 			<%-- 로그인 된 경우 --%>
 			<c:when test="${not empty USER}">
 				<%-- 관리자 로그인 --%>
-				<c:if test="${USER.userId == 'admin'}">
+				<c:if test="${USER.userid == 'admin'}">
 					<a href="${path}/user/admin.shop">관리자</a>
 				</c:if>
 				<%-- 일반 사용자 로그인 --%>
@@ -30,7 +30,7 @@
 			</c:when>
 			<%-- 로그인 안된 경우 --%>
 			<c:otherwise>
-				<a href="${path}/user/loginForm.shop">로그인</a>
+				<a href="${path}/main/entranceForm.marry">로그인</a>
 			</c:otherwise>
 		</c:choose></td>
 	</tr>

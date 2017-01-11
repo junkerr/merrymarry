@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file="/WEB-INF/jsp/jspHeader.jsp" %>
+<!-- 회원가입, 로그인 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,17 +49,13 @@
     });
 
     function mySubmit() {
-       document.memForm.submit();
+       document.logForm.submit();
 	}
-
-    $.ajax({
-    	  type: "POST",
-    	  url: url,
-    	  data: data,
-    	  success: success,
-    	  dataType: dataType
-    	});
-    $.post( "mainForm.marry" );
+    
+    function mySubmit2() {
+        document.memForm.submit();
+ 	}
+    
     </script>
     <style type="text/css">
     	#example {
@@ -78,7 +75,7 @@
     </style>
 </head>
 <body>
-	<form:form modelAttribute="member3" name="memForm" method="post" action="mainForm.marry">
+	<form:form modelAttribute="member3" name="logForm" method="post" action="login.marry">
 		<spring:hasBindErrors name="member3">
 			<font color="red">
 				<c:forEach items="${errors.globalErrors}" var="error">
@@ -99,13 +96,16 @@
 			</tr>
 			<tr class="log">
 				<td colspan="3" align="center">
-				<input type="submit" value="로그인">
+				<input type="button" value="로그인" onclick="mySubmit()">
 				<input type="button" id="addItemBtn" value="회원가입">
 				<input type="button" id="clickMe" value="ID 찾기" />
 				<input type="button" id="clickMe2" value="PW 찾기"></td>
 			</tr>
-			
-			<%-- <!-- 회원가입 시작 -->
+		</table>
+	</form:form>
+	<form:form modelAttribute="member3" name="memForm" method="post" action="mainForm.marry">
+		<table id="example" border="0px" cellspacing="20" align="center">
+			<!-- 회원가입 시작 -->
         	<tr class="a">
 	           <td>ID</td>
 				<td><form:input path="userid" />
@@ -173,14 +173,16 @@
         	</tr>
         	<tr class="a">
         		<td colspan="2">
-        		<input type="button" value="회원가입" onclick="mySubmit()">
+        		<input type="button" value="회원가입" onclick="mySubmit2()">
         		<input type="reset" value="다시 작성">
         		<input type="button" value="메인으로 이동" onclick="location.href='entranceForm.marry'"></td>
         	</tr>
-        	<!-- 회원가입끝 --> --%>
-			
+        	<!-- 회원가입끝 -->
 		</table>
+		</form:form>
+		<form:form modelAttribute="member3" name="findidForm" method="post" action="findidForm.marry">
 		<table>
+			<!-- ID 찾기 -->
 			<tr>
 				<td>
 					<div id="dialog1" style="display:none; text-align:center; border:2px solid black;">
@@ -214,8 +216,8 @@
 					</tr>
 					<tr>
 						<td>E-mail 인증</td>
-						<td><form:input path="find2_email" />
-						<font color="red"><form:errors path="find2_email" /></font><input type="button" id="confirm" value="전송"></td>
+						<td><form:input path="find_email_confirm" />
+						<font color="red"><form:errors path="find_email_confirm" /></font><input type="button" id="confirm" value="전송"></td>
 					</tr>
 					<tr>
 						<td colspan="3">
@@ -225,15 +227,20 @@
 					</tr>
 					</table>
 					</div>
+				</td>
+			</tr>
+			<!-- ID 찾기 끝 -->
+		</table>
+		</form:form>
+		<form:form modelAttribute="member3" name="findpwForm" method="post" action="findpwForm.marry">
+		<table>
+			<!-- PW 재설정 -->
+			<tr>
+				<td>
 					<div id="dialog2" style="display:none; text-align:center; border:2px solid black;">
-					<table id="findId">
+					<table id="findPw">
 					<tr>
-						<td colspan="3">PW 찾기</td>
-					</tr>
-					<tr>
-						<td>ID</td>
-						<td><form:input path="find_userid" />
-						<font color="red"><form:errors path="find_userid" /></font></td>
+						<td colspan="3">PW 재설정</td>
 					</tr>
 					<tr>
 						<td>PW 질문</td>
@@ -251,19 +258,20 @@
 					</tr>
 					<tr>
 						<td>E-mail 인증</td>
-						<td><form:input path="find3_email" />
-						<font color="red"><form:errors path="find3_email" /></font><input type="button" id="confirm2" value="전송"></td>
+						<td><form:input path="find_email_confirm2" />
+						<font color="red"><form:errors path="find_email_confirm2" /></font><input type="button" id="confirm2" value="전송"></td>
 					</tr>
 					<tr>
 						<td colspan="2">
-						<input type="button" id="" value="PW 찾기">
+						<input type="button" id="" value="PW 재설정">
 						<input type="reset" value="다시 작성"></td>
 					</tr>
 					</table>
 					</div>
 				</td>
 			</tr>
+			<!-- PW 재설정 끝 -->
 		</table>
-	</form:form>
+		</form:form>
 </body>
 </html>

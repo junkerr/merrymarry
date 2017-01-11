@@ -46,13 +46,13 @@ public class EntranceController {
 	
 	//로그인
 	@RequestMapping("main/login")
-	public ModelAndView login(String login_userid, String login_password, BindingResult bindingResult, HttpSession session) {
+	public ModelAndView login(@Valid Member3 member, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
-		Member3 loginMember = marryService.getMemberByIdPw(login_userid, login_password);
+		Member3 loginMember = marryService.getMemberByIdPw(member);
 		if(loginMember == null) {
 			bindingResult.reject("error.login.id");
 			mav.getModel().putAll(bindingResult.getModel());
@@ -64,4 +64,22 @@ public class EntranceController {
 		return mav;
 	}
 	
+	//ID 찾기
+	@RequestMapping("main/findidForm")
+	public ModelAndView findidForm(@Valid Member3 member, BindingResult bindingResult) {
+		ModelAndView mav = new ModelAndView();
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		Member3 findId = marryService.getMemberById(member);
+		if(findId == null) {
+			bindingResult.reject("error.find.id");
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		mav.setViewName("main/entranceForm");
+		mav.addObject("member", findId);
+		return mav;
+	}
 }
