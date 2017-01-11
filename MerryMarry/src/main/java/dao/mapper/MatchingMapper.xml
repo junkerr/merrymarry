@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.MatchingMapper">
+	<select id="getlist" parameterType="hashmap" resultType="Member3">
+		SELECT * FROM MEMBER3
+		<where>
+			<!-- 지역(대분류) -->
+			<if test='district !="0"' >
+				address_sido LIKE #{district}
+			</if>
+			
+			<!-- 직업(대분류) -->
+			<if test='job != "0"'>
+				AND main_c LIKE #{job}
+			</if>
+		
+			<!-- 연봉 -->
+			<if test='salary == "1"'>
+				AND sal BETWEEN 0 AND 3000
+			</if>
+			<if test='salary == "2"'>
+				AND sal BETWEEN 3000 AND 6000
+			</if>
+			<if test='salary == "3"'>
+				AND sal BETWEEN 6000 AND 10000
+			</if>
+			<if test='salary == "4"'>
+				AND sal >= 10000
+			</if>
+			
+			<!-- 키 -->
+			<if test='height=="1"'>
+				<![CDATA[
+					AND height < 166
+					]]>
+			</if>
+			<if test='height=="2"'>
+				AND height BETWEEN 166 AND 171
+			</if>
+			<if test='height=="3"'>
+				AND height BETWEEN 171 AND 175
+			</if>
+			<if test='height=="4"'>
+				AND height BETWEEN 175 AND 178
+			</if>
+			<if test='height=="5"'>
+				AND height BETWEEN 178 AND 182
+			</if>
+			<if test='height=="6"'>
+				<![CDATA[
+					AND height >= 182
+					]]>
+			</if>
+			
+			<!-- 몸무게 -->
+			<if test='weight =="1"'>
+				<![CDATA[
+						AND weight < 60
+					]]>
+			</if>
+			<if test='weight =="2"'>
+				AND weight BETWEEN 60 AND 70
+			</if>
+			<if test='weight =="3"'>
+				AND weight BETWEEN 70 AND 80
+			</if>
+			<if test='weight =="4"'>
+				AND weight BETWEEN 80 AND 90
+			</if>
+			<if test='weight =="5"'>
+				AND weight BETWEEN 90 AND 100
+			</if>
+			<if test='weight =="6"'>
+				<![CDATA[
+					AND weight >=100
+					]]>
+			</if>
+	
+			
+			<!-- 종교 -->
+			<if test='religion !="0"'>
+				AND religion like #{religion}
+			</if>
+			
+		</where>
+	</select>
+</mapper> 

@@ -5,7 +5,9 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="logic.Member3" alias="Member3" />
 	</typeAliases>
 	<mappers>
+		<mapper resource="dao/mapper/MatchingMapper.xml"/>
 	</mappers>
 </configuration>
