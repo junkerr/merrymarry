@@ -18,3 +18,6 @@ itemAdd.title = 상품 등록
 itemEdit.title = 상품 변경
 
 error.board.password=게시물 비밀번호가 틀립니다.
+
+# /src/messages.txt => messages.properties
+entranceMenu.title = \uCD5C\uACE0\uC758 \uACB0\uD63C\uC815\uBCF4\uC5C5\uCCB4 MerryMarry\uC5D0 \uC624\uC2E0 \uC5EC\uB7EC\uBD84\uC744 \uD658\uC601\uD569\uB2C8\uB2E4.
