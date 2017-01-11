@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--   /src/dao.mapper/SaleMapper.xml  -->
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.BoardMapper">
+	<select id="count" parameterType="map"
+		resultType="int" >
+		select count(*) from board
+		<if test="column !=null and find !=null">
+			where ${column} like '%${find}%'
+		</if>
+		</select>
+	<select id="list" parameterType="map"
+		resultType="Board" >
+		SELECT * 
+        FROM (SELECT rownum rnum, num, name, subject, content, file1 fileUrl, regdate, ref, reflevel, refstep, pass, readcnt
+                FROM (SELECT *
+                        FROM BOARD
+        <if test="column !=null and find !=null">
+			where ${column} like '%${find}%'
+		</if>
+                       ORDER BY ref DESC, refstep ASC))
+        WHERE rnum >= #{startrow} AND rnum &lt;=#{endrow}
+		</select>
+	
+</mapper>
